@@ -1,20 +1,20 @@
 # dags/churn.py
 import sys
-sys.path.append('/home/mle-user/mle_projects/mle_airflow/')
+sys.path.append('/home/mle-user/mle_projects/mle_airflow/plugins/')
 import pendulum
 from airflow.decorators import dag, task
-from plugins.steps.messages import send_telegram_success_message, send_telegram_failure_message
+from steps.messages import send_telegram_success_message, send_telegram_failure_message
 
 @dag(
     schedule='@once',
     start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
     catchup=False,
-    tags=["ETL"],
+    tags=["ETL","churn"],
     on_success_callback=send_telegram_success_message,
     on_failure_callback=send_telegram_failure_message,
     dag_id='churn'
 )
-def prepare_churn_dataset():
+def prepare_churn_dataset(**kwargs):
     import pandas as pd
     import numpy as np
     from airflow.providers.postgres.hooks.postgres import PostgresHook
@@ -59,7 +59,7 @@ def prepare_churn_dataset():
             metadata.create_all(db_conn)
         
     @task()
-    def extract(**kwargs):
+    def extract():
 
         hook = PostgresHook('source_db')
         conn = hook.get_conn()

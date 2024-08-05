@@ -1,14 +1,13 @@
 from airflow.providers.telegram.hooks.telegram import TelegramHook
 import os
-import pandas as pd
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
-
-telegram_token = os.environ.get('TELEGRAM_TOKEN')
-telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
-
 def send_telegram_success_message(context): 
+    
+    load_dotenv()
+    telegram_token = os.environ.get('TELEGRAM_TOKEN')
+    telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+
     hook = TelegramHook(telegram_conn_id='test',
                         token=telegram_token,
                         chat_id=telegram_chat_id)
@@ -22,6 +21,11 @@ def send_telegram_success_message(context):
     })
 
 def send_telegram_failure_message(context):
+    
+    load_dotenv()
+    telegram_token = os.environ.get('TELEGRAM_TOKEN')
+    telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+
     hook = TelegramHook(telegram_conn_id='test',
                         token=telegram_token,
                         chat_id=telegram_chat_id)
@@ -34,9 +38,9 @@ def send_telegram_failure_message(context):
         'chat_id': telegram_chat_id,
         'text': message
     })
-    
+
 '''
-send_telegram_failure_message({
+send_telegram_success_message({
     'dag':'airflow',
     'task_instance_key_str': 'error :(',
     'run_id':'13456'
