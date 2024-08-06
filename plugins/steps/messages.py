@@ -20,6 +20,8 @@ def send_telegram_success_message(context):
         'text': message
     })
 
+    print(message)
+
 def send_telegram_failure_message(context):
     
     load_dotenv()
@@ -38,6 +40,7 @@ def send_telegram_failure_message(context):
         'chat_id': telegram_chat_id,
         'text': message
     })
+    print(message)
 
 '''
 send_telegram_success_message({
