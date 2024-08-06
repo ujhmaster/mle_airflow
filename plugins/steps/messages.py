@@ -9,7 +9,8 @@ def send_telegram_success_message(context):
     telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
 
     print(telegram_token, telegram_chat_id)
-    hook = TelegramHook(telegram_conn_id='test',
+    """
+    hook = TelegramHook(telegram_conn_id='telegram_bot',
                         token=telegram_token,
                         chat_id=telegram_chat_id)
     dag = context['dag']
@@ -22,6 +23,7 @@ def send_telegram_success_message(context):
     })
 
     print(message)
+    """
 
 def send_telegram_failure_message(context):
     
@@ -29,7 +31,7 @@ def send_telegram_failure_message(context):
     telegram_token = os.environ.get('TELEGRAM_TOKEN')
     telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
 
-    hook = TelegramHook(telegram_conn_id='test',
+    hook = TelegramHook(telegram_conn_id='telegram_bot',
                         token=telegram_token,
                         chat_id=telegram_chat_id)
     dag = context['dag']

@@ -103,5 +103,6 @@ def prepare_churn_dataset(**kwargs):
     data = extract()
     transformed_data = transform(data)
     load(transformed_data)
+
     
 prepare_churn_dataset()
