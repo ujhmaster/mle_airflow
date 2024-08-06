@@ -94,10 +94,6 @@ def prepare_churn_dataset(**kwargs):
             replace_index=['customer_id'],
             rows=data.values.tolist()
         )
-        send_telegram_success_message({
-            'dag':'airflow-from-load function',
-            'run_id':'test'
-            })
             
     create_table()
     data = extract()

@@ -1,15 +1,14 @@
 from airflow.providers.telegram.hooks.telegram import TelegramHook
-import os
-from dotenv import load_dotenv, find_dotenv
+from airflow.models import Variable
+
 
 def send_telegram_success_message(context): 
     
-    load_dotenv()
-    telegram_token = os.environ.get('TELEGRAM_TOKEN')
-    telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
-
-    print(telegram_token, telegram_chat_id)
-    """
+    print('############################################################################')
+    
+    telegram_token   = Variable.get("telegram_token")
+    telegram_chat_id = Variable.get("telegram_chat_id")
+    
     hook = TelegramHook(telegram_conn_id='telegram_bot',
                         token=telegram_token,
                         chat_id=telegram_chat_id)
@@ -23,13 +22,11 @@ def send_telegram_success_message(context):
     })
 
     print(message)
-    """
 
 def send_telegram_failure_message(context):
     
-    load_dotenv()
-    telegram_token = os.environ.get('TELEGRAM_TOKEN')
-    telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+    telegram_token   = Variable.get("telegram_token")
+    telegram_chat_id = Variable.get("telegram_chat_id")
 
     hook = TelegramHook(telegram_conn_id='telegram_bot',
                         token=telegram_token,
