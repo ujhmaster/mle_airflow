@@ -8,6 +8,7 @@ def send_telegram_success_message(context):
     telegram_token = os.environ.get('TELEGRAM_TOKEN')
     telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
 
+    print(telegram_token, telegram_chat_id)
     hook = TelegramHook(telegram_conn_id='test',
                         token=telegram_token,
                         chat_id=telegram_chat_id)
